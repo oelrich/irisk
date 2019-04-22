@@ -1,0 +1,5 @@
+li#3	li#3	ri#3	lå#3	pe#3	pe#3
+li#2	ri#2	ri#1	lå#1	pe#1	pe#1
+li#1	li#0	ri#0	lå#0	pe#0	pe#1
+li#1	li#1	ri#1	lå#1	pe#1	pe#1	tu#3
+											tu#1	tu#0	tu#1
