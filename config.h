@@ -15,3 +15,5 @@
 // #undef COMBO_COUNT
 // #define COMBO_COUNT 52
 // #define TAPPING_TERM 220
+#define LEADER_PER_KEY_TIMING
+#define LEADER_TIMEOUT 250

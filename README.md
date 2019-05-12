@@ -1,20 +1,36 @@
 ## Irisk - A swedish layout for lazy fingers
+I wanted to see if it was a good idea to use a layout where movement of the writsts is traded for an extra keypress or two. So far I have not been able to test it extensively.
 
-## COMBO_ENABLE
+There are three general ideas in its design.
 
-Seemed like a good idea. Really wasn't. The problem is detecting the combo and differentiating from text. Probably doable for some characters, but not near enough for all special characters.
+1) Statistically informed placement of characters.
+2) Rolling window of symbols.
+3) Logical symbol layout.
 
-### The map
 
-ESC     1   2   3   4   5               6   7   8   9   0   LEFT_WIN
+### A minimal Crkbd compatible layout
 
-TAB     X   C   Å   W   Z               F5  J   P   Ä   Q   BACK_SPACE
 
-L_CTRL  A   T   N   R   B               Y   O   S   I   E   R_CTRL
+### The layers
+#### Base
+![](00_BASE.png)
+#### Text
+![](01_TEXT.png)
+#### Symbols
+![](02_SYMB.png)
+#### Code
+![](03_CODE.png)
+#### Numbers
+![](04_NUMS.png)
+#### Move
+![](07_MOVE.png)
+#### Mouse
+![](08_MOUS.png)
+#### Control
+![](09_CTRL.png)
 
-L_SHIFT D   M   U   K   V  CAPS          Ö   G   F   H   L   R_SHIFT
+### Matrix
+![](IRISK_MATRIX.png)
 
-         BACK_SPACE ENTER TAB      L_ALT SPACE R_SHIFT
-
-I do like this map. But one with layers might well be better.
-Is this the real me, is this a fantasy, caught in a landslide ...
+#### Stuff
+Images generated using [ww.keyboard-layout-editor.com](http://www.keyboard-layout-editor.com)

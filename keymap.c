@@ -3,76 +3,140 @@
 #include "action_layer.h"
 #include "eeconfig.h"
 
-#define KC_AA NO_AA
-#define KC_AE NO_AE
-#define KC_OE NO_OSLH
-
-#undef KC_AT
-#define KC_AT NO_AT
-#define KC_RSHFT KC_RSHIFT
-
 extern keymap_config_t keymap_config;
 
-#define _ATNRB 0
-#define _CMD   1
-#define _MOVE  2
-#define _MOUSE 3
-#define _NUMS  5
-#define _MIDI  7
+///// Layer definitions
+// Scrolling over symbol array
+#define _ONE   1
+#define _TWO   1 + _ONE
+#define _THREE 1 + _TWO
+#define _FOUR  1 + _THREE
+#define _FIVE  1 + _FOUR
+#define _SIX   1 + _FIVE
 
-#define _SYMB  15
+// Named layers
+#define _BASE  0
+#define _TEXT  _ONE
+#define _SYMB  _TWO
+#define _CODE  _THREE
+#define _NUMS  _FOUR
+#define _UPPR  _FIVE
+#define _FUNC  _SIX
+#define _MOVE  7
+#define _MOUS  8
+#define _CTRL  9
+#define _MIDI 10
 
-#define KC_ATNRB  TO(_ATNRB)
-#define KC_CMD    TO(_CMD)
-#define KC_MOVE   TO(_MOVE)
-#define KC_MOUSE  TO(_MOUSE)
-#define KC_NUMS   TO(_NUMS)
-#define KC_MIDI   TO(_MIDI)
+///// Special key definitioins
+// The special single key left over on the alpha layer.
+/// Not always visible. Use for whatever (left pinky up)
+#define MACR0  KC_AT
+/// Rolling empty ...
+#define MACR1 KC_AT
+// Three outer keys on the left hand side
+#define LEUPR MT(MOD_RALT, KC_ESC)
+#define LEMID KC_LALT
+#define LELOW TO(_BASE)
+// Three outer keys on the right hand side
+#define RIUPR KC_RGUI
+#define RIMID KC_RCTRL
+#define RILOW KC_RSHIFT
+// Three thumb keys on the left hand side
+#define LETIN LT(_NUMS, KC_BSPACE)
+#define LETHO LT(_CODE, KC_ENTER)
+#define LETOT LT(_CTRL, KC_LEAD)
+// Three thumb keys on the right hand side
+#define RITIN LT(_TEXT, KC_DEL)
+#define RITHO LT(_SYMB, KC_SPACE)
+#define RITOT LT(_MOVE, KC_TAB)
 
-#define KC_SYMB   MO(_SYMB)
-#define KC_TAB_M  LT(_MOVE, KC_TAB)
-#define KC_BSPC_M LT(_NUMS, KC_BSPC)
+#define MS_UP KC_MS_UP
+#define MS_DOWN KC_MS_DOWN
+#define MS_LEFT KC_MS_LEFT
+#define MS_RGHT KC_MS_RIGHT
 
-#define KC_CTRL_A LCTL(KC_A)
-#define KC_CTRL_S LCTL(KC_S)
-#define KC_CTRL_N LCTL(KC_N)
-#define KC_CTRL_F LCTL(KC_F)
+#define MS_BTN1 KC_MS_BTN1
+#define MS_BTN2 KC_MS_BTN2
+#define MS_BTN3 KC_MS_BTN3
+#define MS_BTN4 KC_MS_BTN4
+#define MS_BTN5 KC_MS_BTN5
 
-#define KC_SPC_RALT  RALT_T(KC_SPC)
-#define KC_ENT_LCTL  LCTL_T(KC_ENT)
+#define MS_SCUP KC_MS_WH_UP
+#define MS_SCDN KC_MS_WH_DOWN
+#define MS_SCLE KC_MS_WH_LEFT
+#define MS_SCRI KC_MS_WH_RIGHT
 
-#define KC_UNDO LCTL(KC_Z)
-#define KC_REDO LCTL(KC_Y)
+#define MS_ACC0 KC_MS_ACCEL0
+#define MS_ACC1 KC_MS_ACCEL1
+#define MS_ACC2 KC_MS_ACCEL2
+
+#define NO_PERC LSFT(KC_5)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_ATNRB] = LAYOUT_kc(
-    ESC,   F1, F2, F3, F4, F5,               F6, F7, F8, F9, F10, LGUI,
-    NO,    X,  C,  AA, W,  Z,                AT, J,  P,  AE, Q,   NO,
-    MOUSE, A,  T,  N,  R,  B,                Y,  O,  S,  I,  E,   MOVE,
-    ATNRB, D,  M,  U,  K,  V,  LOCK,   ENT,  OE, G,  F,  H,  L,   NUMS,
-           BSPC_M, ENT_LCTL, TAB_M,     SYMB, SPC_RALT, RSHFT),
-  [_NUMS] = LAYOUT(
-    KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                                 KC_NUMLOCK, KC_CLEAR, KC_KP_SLASH, KC_KP_ASTERISK, KC_KP_MINUS, KC_TRNS,
-    KC_TRNS, NO_COLN, NO_SCLN, NO_PIPE, KC_TILD, KC_PERCENT,                    KC_CALC,    KC_P7,    KC_P8,       KC_P9,          KC_KP_PLUS,  KC_TRNS,
-    KC_TRNS, NO_LPRN, NO_RPRN, NO_LBRC, NO_RBRC, NO_AMPR,                       KC_KP_DOT,  KC_P4,    KC_P5,       KC_P6,          KC_KP_EQUAL, KC_TRNS,
-    KC_TRNS, NO_LESS, NO_GRTR, NO_LESS, NO_GRTR, KC_EXLM,  KC_TRNS,   KC_TRNS,  KC_P0,      KC_P1,    KC_P2,       KC_P3,          KC_KP_COMMA, KC_TRNS,
-                                        KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS),
+  [_BASE] = LAYOUT(
+    KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    LEUPR, MACR0,   KC_C,    NO_AA,   KC_W,    KC_Z,                  KC_X,    KC_J,    KC_P,    NO_AE,   KC_Q,    RIUPR,
+    LEMID, KC_A,    KC_T,    KC_N,    KC_R,    KC_B,                  KC_Y,    KC_O,    KC_S,    KC_I,    KC_E,    RIMID,
+    LELOW, KC_D,    KC_M,    KC_U,    KC_K,    KC_V,    KC_NO, KC_NO, NO_OSLH, KC_G,    KC_F,    KC_H,    KC_L,    RILOW,
+                                         LETIN, LETHO, LETOT,   RITOT, RITHO, RITIN),
+  [_TEXT] = LAYOUT(
+    KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    LEUPR, NO_ASTR, NO_AMPR, NO_AT,   NO_EQL,  NO_CIRC,               NO_TILD, NO_PERC, NO_UNDS, NO_PIPE, NO_SLSH, RIUPR,
+    LEMID, NO_SCLN, KC_COMM, NO_QUES, NO_APOS, NO_ACUT,               NO_GRV,  NO_QUO2, KC_EXLM, KC_DOT,  NO_COLN, RIMID,
+    LELOW, MACR1,   NO_QUOT, KC_HASH, NO_DLR,  NO_EURO, KC_NO, KC_NO, NO_BULT, NO_PND,  NO_SECT, NO_HALF, NO_BSLS, RILOW,
+                                         LETIN, LETHO, LETOT,   RITOT, RITHO, RITIN),
   [_SYMB] = LAYOUT(
-    KC_TRNS , KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_TRNS,
-    KC_TRNS , NO_ACUT, NO_SLSH, NO_PIPE, NO_BSLS, KC_PERCENT,                   KC_HASH, NO_PLUS, NO_TILD, NO_EQL,  NO_GRV,  KC_TRNS,
-    KC_TRNS , NO_QUES, NO_SCLN, KC_COMM, NO_APOS, NO_UNDS,                      NO_MINS, NO_QUO2, KC_DOT,  NO_COLN, KC_EXLM, KC_TRNS,
-    KC_TRNS , NO_LESS, NO_LPRN, NO_LCBR, NO_LBRC, NO_AMPR, NO_CIRC,   NO_QUOT,  NO_ASTR, NO_RBRC, NO_RCBR, NO_RPRN, NO_GRTR, KC_TRNS,
-                                         NO_EURO, NO_DLR, NO_PND,      KC_TRNS, NO_SECT, NO_BULT),
-  [_MOVE] = LAYOUT_kc(
-    TRNS, F11,       F12,     F13,     F14,        F15,                           F16,   F17,  F18,  F19,  F20,  TRNS,
-    TRNS, MS_ACCEL0, MS_BTN5, MS_UP,   MS_WH_LEFT, MS_WH_RIGHT,                   COPY,  HOME, UP,   END,  PGUP, TRNS,
-    TRNS, MS_ACCEL0, MS_LEFT, MS_DOWN, MS_RIGHT,   MS_WH_UP,                      CUT,   LEFT, DOWN, RGHT, PGDN, TRNS,
-    TRNS, MS_ACCEL0, MS_BTN4, MS_BTN2, MS_BTN3,    MS_WH_DOWN, NO,     NO, PASTE, CTRL_A,  CTRL_S,  CTRL_N,  CTRL_F,  TRNS,
-                                               TRNS, MS_BTN1, NO,        TRNS, UNDO, REDO),
-  [_MOUSE] = LAYOUT_kc(
-    TRNS, F11,       F12,     F13,     F14,        F15,         F16,           F17,        F18,         F19,         F20,       TRNS,
-    TRNS, NO, MS_BTN5, NO,   MS_WH_LEFT, MS_WH_RIGHT,           NO,            MS_WH_LEFT, MS_UP,       MS_WH_RIGHT, MS_ACCEL0, TRNS,
-    TRNS, NO, NO, NO, NO,   MS_WH_UP,                           MS_WH_UP,      MS_LEFT,    MS_DOWN,     MS_RIGHT,    MS_ACCEL1, TRNS,
-    TRNS, NO, MS_BTN4, NO, NO,    MS_WH_DOWN, NO,           NO, MS_WH_DOWN, MS_WH_LEFT, MS_WH_RIGHT, CTRL_N,      MS_ACCEL2, TRNS,
-                                        TRNS, NO, NO,        MS_BTN1, MS_BTN3, MS_BTN2)
+    KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    LEUPR, NO_PLUS, NO_LPRN, NO_LCBR, NO_LBRC, NO_LESS,               NO_GRTR, NO_RBRC, NO_RCBR, NO_RPRN, NO_MINS, RIUPR,
+    LEMID, NO_ASTR, NO_AMPR, NO_AT,   NO_EQL,  NO_CIRC,               NO_TILD, NO_PERC, NO_UNDS, NO_PIPE, NO_SLSH, RIMID,
+    LELOW, NO_SCLN, KC_COMM, NO_QUES, NO_APOS, NO_ACUT, KC_NO, KC_NO, NO_GRV,  NO_QUO2, KC_EXLM, KC_DOT,  NO_COLN, RILOW,
+                                         LETIN, LETHO, LETOT,   RITOT, RITHO, RITIN),
+  [_CODE] = LAYOUT(
+    KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    LEUPR, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    RIUPR,
+    LEMID, NO_PLUS, NO_LPRN, NO_LCBR, NO_LBRC, NO_LESS,               NO_GRTR, NO_RBRC, NO_RCBR, NO_RPRN, NO_MINS, RIMID,
+    LELOW, NO_ASTR, NO_AMPR, NO_AT,   NO_EQL,  NO_CIRC, KC_NO, KC_NO, NO_TILD, NO_PERC, NO_UNDS, NO_PIPE, NO_SLSH, RILOW,
+                                         LETIN, LETHO, LETOT,   RITOT, RITHO, RITIN),
+  [_NUMS] = LAYOUT(
+    KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    LEUPR, MACR1,   NO_QUOT, KC_HASH, NO_DLR,  NO_EURO,               NO_BULT, NO_PND,  NO_SECT, NO_HALF, NO_BSLS, RIUPR,
+    LEMID, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    RIMID,
+    LELOW, NO_PLUS, NO_LPRN, NO_LCBR, NO_LBRC, NO_LESS, KC_NO, KC_NO, NO_GRTR, NO_RBRC, NO_RCBR, NO_RPRN, NO_MINS, RILOW,
+                                         LETIN, LETHO, LETOT,   RITOT, RITHO, RITIN),
+  [_UPPR] = LAYOUT(
+    KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    LEUPR, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                 KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  RIUPR,
+    LEMID, MACR1,   NO_QUOT, KC_HASH, NO_DLR,  NO_EURO,               NO_BULT, NO_PND,  NO_SECT, NO_HALF, NO_BSLS, RIMID,
+    LELOW, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_NO, KC_NO, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    RILOW,
+                                         LETIN, LETHO, LETOT,   RITOT, RITHO, RITIN),
+  [_FUNC] = LAYOUT(
+    KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    LEUPR, KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,                KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  RIUPR,
+    LEMID, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                 KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  RIMID,
+    LELOW, MACR1,   NO_QUOT, KC_HASH, NO_DLR,  NO_EURO, KC_NO, KC_NO, NO_BULT, NO_PND,  NO_SECT, NO_HALF, NO_BSLS, RILOW,
+                                         LETIN, LETHO, LETOT,   RITOT, RITHO, RITIN),
+  [_MOVE] = LAYOUT(
+    KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    LEUPR, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_HOME, KC_UP,   KC_END,  KC_NO,   RIUPR,
+    LEMID, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_LEFT, KC_DOWN, KC_RGHT, KC_PGUP, RIMID,
+    LELOW, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO, KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_PGDN, RILOW,
+                                         LETIN, LETHO, LETOT,   RITOT, RITHO, RITIN),
+  [_MOUS] = LAYOUT(
+    KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    LEUPR, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 MS_ACC2, MS_SCLE, MS_UP,   MS_SCRI, MS_BTN4, RIUPR,
+    LEMID, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 MS_ACC0, MS_LEFT, MS_DOWN, MS_RGHT, MS_SCUP, RIMID,
+    LELOW, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO, KC_NO, MS_ACC1, MS_BTN1, MS_BTN2, MS_BTN3, MS_SCDN, RILOW,
+                                         LETIN, LETHO, LETOT,   RITOT, RITHO, RITIN),
+  [_CTRL] = LAYOUT(
+    KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    LEUPR, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   RIUPR,
+    LEMID, TO(1),   TO(2),   TO(3),   TO(4),   TO(5),                 TO(6),   TO(7),   TO(8),   TO(9),   TO(10),  RIMID,
+    LELOW, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO, KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   RILOW,
+                                         LETIN, LETHO, LETOT,   RITOT, RITHO, RITIN),
+  [_MIDI] = LAYOUT(
+    KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    LEUPR, KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,                KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  RIUPR,
+    LEMID, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                 KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  RIMID,
+    LELOW, MACR1,   NO_QUOT, KC_HASH, NO_DLR,  NO_EURO, KC_NO, KC_NO, NO_BULT, NO_PND,  NO_SECT, NO_HALF, NO_BSLS, RILOW,
+                                         LETIN, LETHO, LETOT,   RITOT, RITHO, RITIN)
 };
