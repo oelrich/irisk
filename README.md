@@ -12,6 +12,13 @@ There are three general ideas in its design.
 
 
 ### The layers
+#### How to read
+The center of a key represents the symbol sent on keypress and release.
+
+The upper left corner represents the activation of a layer or modifier key.
+
+A layer is indicated by four capital letters.
+
 #### Base
 ![](00_BASE.png)
 #### Text

@@ -34,21 +34,21 @@ extern keymap_config_t keymap_config;
 /// Rolling empty ...
 #define MACR1 KC_AT
 // Three outer keys on the left hand side
-#define LEUPR MT(MOD_RALT, KC_ESC)
-#define LEMID KC_LALT
+#define LEUPR MT(MOD_LALT, KC_ESC)
+#define LEMID KC_LCTRL
 #define LELOW TO(_BASE)
 // Three outer keys on the right hand side
 #define RIUPR KC_RGUI
-#define RIMID KC_RCTRL
+#define RIMID KC_RALT
 #define RILOW KC_RSHIFT
 // Three thumb keys on the left hand side
 #define LETIN LT(_NUMS, KC_BSPACE)
 #define LETHO LT(_CODE, KC_ENTER)
 #define LETOT LT(_CTRL, KC_LEAD)
 // Three thumb keys on the right hand side
-#define RITIN LT(_TEXT, KC_DEL)
+#define RITIN LT(_MOVE, KC_DEL)
 #define RITHO LT(_SYMB, KC_SPACE)
-#define RITOT LT(_MOVE, KC_TAB)
+#define RITOT LT(_TEXT, KC_TAB)
 
 #define MS_UP KC_MS_UP
 #define MS_DOWN KC_MS_DOWN
