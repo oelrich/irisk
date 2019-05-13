@@ -20,24 +20,24 @@ The upper left corner represents the activation of a layer or modifier key.
 A layer is indicated by four capital letters.
 
 #### Base
-![](00_BASE.png)
+![](layers/00_BASE.png)
 #### Text
-![](01_TEXT.png)
+![](layers/01_TEXT.png)
 #### Symbols
-![](02_SYMB.png)
+![](layers/02_SYMB.png)
 #### Code
-![](03_CODE.png)
+![](layers/03_CODE.png)
 #### Numbers
-![](04_NUMS.png)
+![](layers/04_NUMS.png)
 #### Move
-![](07_MOVE.png)
+![](layers/07_MOVE.png)
 #### Mouse
-![](08_MOUS.png)
+![](layers/08_MOUS.png)
 #### Control
-![](09_CTRL.png)
+![](layers/09_CTRL.png)
 
 ### Matrix
-![](IRISK_MATRIX.png)
+![](layers/IRISK_MATRIX.png)
 
 #### Stuff
 Images generated using [ww.keyboard-layout-editor.com](http://www.keyboard-layout-editor.com)
