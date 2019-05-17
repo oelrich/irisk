@@ -20,7 +20,7 @@ A layer is indicated by four capital letters.
 #### Code
 ![](layout/02_CODE.png)
 #### Function
-![](layout/04_FCNT.png)
+![](layout/04_FNCT.png)
 #### Move
 ![](layout/07_MOVE.png)
 #### Mouse
