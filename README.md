@@ -1,15 +1,9 @@
 ## Irisk - A swedish layout for lazy fingers
 I wanted to see if it was a good idea to use a layout where movement of the writsts is traded for an extra keypress or two. So far I have not been able to test it extensively.
 
-There are three general ideas in its design.
+There main idea in its design is based on statistically informed placement of characters. The keys were assigned an "effort" score for reaching and an amalgamation of Swedish, English and programming character frequency was created. The more frequent characters were assigned to the low effort keys alternating left to right. Due to ergonomics and functional requirements some keys were placed on the thumb keys and the side keys.
 
-1) Statistically informed placement of characters.
-2) Rolling window of symbols.
-3) Logical symbol layout.
-
-
-### A minimal Crkbd compatible layout
-
+It was also considered desirable to keep the layout compatible with the Crkbd keyboard. To do this seven keys from each side is ignored.
 
 ### The layers
 #### How to read
@@ -20,24 +14,19 @@ The upper left corner represents the activation of a layer or modifier key.
 A layer is indicated by four capital letters.
 
 #### Base
-![](layers/00_BASE.png)
-#### Text
-![](layers/01_TEXT.png)
+![](layout/00_BASE.png)
 #### Symbols
-![](layers/02_SYMB.png)
+![](layout/01_SYMB.png)
 #### Code
-![](layers/03_CODE.png)
-#### Numbers
-![](layers/04_NUMS.png)
+![](layout/02_CODE.png)
+#### Function
+![](layout/04_FCNT.png)
 #### Move
-![](layers/07_MOVE.png)
+![](layout/07_MOVE.png)
 #### Mouse
-![](layers/08_MOUS.png)
+![](layout/08_MOUS.png)
 #### Control
-![](layers/09_CTRL.png)
-
-### Matrix
-![](layers/IRISK_MATRIX.png)
+![](layout/09_CTRL.png)
 
 #### Stuff
 Images generated using [ww.keyboard-layout-editor.com](http://www.keyboard-layout-editor.com)
