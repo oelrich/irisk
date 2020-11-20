@@ -29,4 +29,4 @@ A layer is indicated by four capital letters.
 ![](layout/09_CTRL.png)
 
 #### Stuff
-Images generated using [ww.keyboard-layout-editor.com](http://www.keyboard-layout-editor.com)
+Images generated using [www.keyboard-layout-editor.com](http://www.keyboard-layout-editor.com)
